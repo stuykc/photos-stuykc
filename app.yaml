@@ -1,0 +1,40 @@
+application: photos-stuykc
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: true
+inbound_services:
+- warmup
+
+skip_files:
+- ^(.*/)?.*\.pyc
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest
+
+handlers:
+- url: /favicon\.ico
+  static_files: photos/static/favicon.ico
+  upload: photos/static/favicon\.ico
+  expiration: 30d
+- url: /(apple-touch-icon.*\.(png))
+  static_files: photos/static/\1
+  upload: photos/static/(apple-touch-icon.*\.png)
+  expiration: 30d
+- url: /images
+  static_dir: photos/static/images
+  expiration: 14d
+- url: /css
+  static_dir: photos/static/css
+  expiration: 7d
+- url: /js
+  static_dir: photos/static/js
+  expiration: 7d
+- url: /admin
+  login: admin
+  script: photos.views.application
+- url: /.*
+  script: photos.views.application
