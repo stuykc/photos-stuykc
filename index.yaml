@@ -1,0 +1,9 @@
+indexes:
+
+- kind: Photos
+  properties:
+    - name: name
+    - name: id
+    - name: email
+    - name: event
+    - name: blobstore_key

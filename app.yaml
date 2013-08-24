@@ -33,8 +33,10 @@ handlers:
 - url: /js
   static_dir: photos/static/js
   expiration: 7d
+- url: /(upload|success)
+  script: photos.upload.app
 - url: /admin
   login: admin
-  script: photos.views.application
+  script: photos.views.app
 - url: /.*
-  script: photos.views.application
+  script: photos.views.app

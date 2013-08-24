@@ -1,3 +1,35 @@
 {% extends "layout.html" %}
 {% block body %}
+<div class="page-header">
+    <h1>Upload</h1>
+</div>
+<form action="{{ upload_url }}" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="span4">
+            <h3>Information</h3>
+            <p><label for="name">Name:</label><input type="text" class="input-block-level" name="name" placeholder="First and last name" /></p>
+            <p><label for="id">ID:</label><input type="text" class="input-block-level" name="id" maxlength="4" placeholder="4 Digit ID" /></p>
+            <p><label for="email">Email:</label><input type="email" class="input-block-level" name="email" placeholder="Email Address" /></p>
+            <p><label for="event">Event:</label><input type="text" class="input-block-level" name="event" placeholder="Name of the Event" /></p>
+        </div>
+        <div class="span7 offset1">
+            <h3>Photos</h3>
+            <input type="file" name="upload" />
+            <button type="button" class="btn" id="addfile">Add more photos</button>
+        </div>
+    </div>
+    <div class="text-center">
+        <hr>
+        <button type="submit" class="btn btn-inverse" style="vertical-align:bottom;">Upload</button>
+    </div>
+</form>
+{% endblock %}
+{% block scripts %}
+<script>
+$(document).ready(function() {
+  $('#addfile').click(function() {
+    $('<input type="file" name="upload" />').insertBefore($(this));
+  });
+});
+</script>
 {% endblock %}
