@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="page-header">
+    <h1>Admin
+    <small><a class="pull-right btn btn-danger" href="{{ logout_url }}">Logout ({{ user }})</a></small>
+    </h1>
+</div>
+<ul class="thumbnails">
+    {% for image in images %}
+    <li class="span2">
+        <a href="{{ image.image_link }}" class="thumbnail">
+            <img src="{{ image.thumbnail_link }}" alt="{{ image.event }}">
+        </a>
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

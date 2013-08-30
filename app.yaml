@@ -35,8 +35,7 @@ handlers:
   expiration: 7d
 - url: /(upload|success)
   script: photos.upload.app
-- url: /admin
-  login: admin
-  script: photos.views.app
+- url: /admin.*
+  script: photos.admin.app
 - url: /.*
   script: photos.views.app
