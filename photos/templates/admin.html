@@ -1,18 +1,60 @@
 {% extends "layout.html" %}
+{% block css %}
+<style>
+.page-header h1 small {display: inline}
+.breadcrumb {margin: 0px;}
+.modal-header .close {margin: 0px; padding: 0px;}
+</style>
+{% endblock %}
 {% block body %}
 <div class="page-header">
-    <h1>Admin
-    <small><a class="pull-right btn btn-danger" href="{{ logout_url }}">Logout ({{ user }})</a></small>
-    </h1>
+    <h1>Admin <small><a class="pull-right btn btn-warning" href="{{ logout_url }}">Logout ({{ user }})</a></small></h1>
 </div>
 <ul class="thumbnails">
     {% for image in images %}
     <li class="span2">
-        <a href="{{ image.image_link }}" class="thumbnail">
-            <img src="{{ image.thumbnail_link }}" alt="{{ image.event }}">
+        <a href="#" class="thumbnail" data-toggle="modal" data-target="#photoFrame" data-event="{{ image.event }}" data-name="{{ image.name}}" data-file="{{ image.file }}" data-link="{{ image.image_link }}" data-key="{{ image.key }}">
+            <img src="{{ image.thumbnail_link }}" title="{{ image.event }}" alt="{{ image.event }}">
         </a>
     </li>
     {% endfor %}
 </ul>
-
+<div class="modal hide fade" id="photoFrame" tabindex="-1" role="dialog" aria-labelledby="photoFrame" aria-hidden="true">
+    <div class="modal-header">
+        <ul class="breadcrumb">
+            <li><a href="" id="crumbEvent"></a><span class="divider">/</span></li>
+            <li><a href="" id="crumbName"></a><span class="divider">/</span></li>
+            <li class="active" id="crumbFile"></li>
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </ul>
+    </div>
+    <div class="modal-body text-center">
+        <img id="modalImage" src="" title="" alt="" />
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-success pull-left" href="" id="approveButton"><i class="icon-ok icon-white"></i> Approve</a>
+        <a class="btn btn-danger pull-left" href="" id="deleteButton"><i class="icon-remove icon-white"></i> Delete</a>
+        <a class="btn pull-right" target="_blank" href="" id="externalButton">Bigger Image <i class="icon-resize-full"></i></a>
+    </div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script>
+$(document).ready(function() {
+  $('a[class="thumbnail"]').click(function() {
+    var photoEvent = $(this).attr('data-event');
+    $('#crumbEvent').attr('href', '#' + photoEvent).text(photoEvent);
+    var photoName = $(this).attr('data-name');
+    $('#crumbName').attr('href', '#' + photoName).text(photoName);
+    var photoFile = $(this).attr('data-file');
+    $('#crumbFile').text(photoFile);
+    var photoLink = $(this).attr('data-link');
+    $('#modalImage').attr('src', photoLink).attr('title', photoEvent).attr('alt', photoEvent);
+    var photoKey = $(this).attr('data-key');
+    $('#approveButton').attr('href', '/admin/approve/' + photoKey);
+    $('#deleteButton').attr('href', '/admin/delete/' + photoKey);
+    $('#externalButton').attr('href', photoLink);
+  });
+});
+</script>
 {% endblock %}

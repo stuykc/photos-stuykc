@@ -24,8 +24,8 @@ handlers:
   static_files: photos/static/\1
   upload: photos/static/(apple-touch-icon.*\.png)
   expiration: 30d
-- url: /images
-  static_dir: photos/static/images
+- url: /img
+  static_dir: photos/static/img
   expiration: 14d
 - url: /css
   static_dir: photos/static/css
@@ -35,6 +35,9 @@ handlers:
   expiration: 7d
 - url: /(upload|success)
   script: photos.upload.app
+- url: /admin/(approve|delete).*
+  script: photos.admin.app
+  login: admin
 - url: /admin.*
   script: photos.admin.app
 - url: /.*
