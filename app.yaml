@@ -33,6 +33,8 @@ handlers:
 - url: /js
   static_dir: photos/static/js
   expiration: 7d
+- url: /cors
+  static_dir: photos/static/cors
 - url: /(upload|success)
   script: photos.upload.app
 - url: /admin/(approve|delete).*
