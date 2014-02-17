@@ -2,3 +2,4 @@
 *.swp
 .DS_Store
 .netrc
+photos/settings.py

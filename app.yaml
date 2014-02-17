@@ -19,14 +19,14 @@ handlers:
 - url: /favicon\.ico
   static_files: photos/static/favicon.ico
   upload: photos/static/favicon\.ico
-  expiration: 30d
+  expiration: 60d
 - url: /(apple-touch-icon.*\.(png))
   static_files: photos/static/\1
   upload: photos/static/(apple-touch-icon.*\.png)
-  expiration: 30d
+  expiration: 60d
 - url: /img
   static_dir: photos/static/img
-  expiration: 14d
+  expiration: 30d
 - url: /css
   static_dir: photos/static/css
   expiration: 7d

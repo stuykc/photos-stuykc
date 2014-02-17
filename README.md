@@ -12,3 +12,5 @@ An upload site for photos taken at Stuyvesant Key Club events.
 - [ ] Send approved photos to Picasa Web Albums (Main Album)
 - [ ] Send deleted photos to Picasa Web Albums (Archived Album)
 - [ ] Drag and drop upload for photos
+
+For settings configuration, copy photos/settings.pi and rename it to settings.py

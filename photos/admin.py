@@ -1,9 +1,8 @@
-from photos import JINJA_ENVIRONMENT
+from photos import JINJA_ENVIRONMENT, Photo
 import webapp2, urllib
 from google.appengine.api import users, images
 from google.appengine.ext import blobstore, db
 from google.appengine.ext.webapp import blobstore_handlers
-from upload import Photos
 
 class AdminPage(webapp2.RequestHandler):
 
@@ -25,7 +24,7 @@ class AdminPage(webapp2.RequestHandler):
             self.redirect(login_url)
 
 def fetchPhotos():
-    photo_query = Photos.all().order('name')
+    photo_query = Photo.all().order('event')
     image_fetch = []
     for photo in photo_query.run():
         if photo.blob_key.content_type.find('image') != -1:
