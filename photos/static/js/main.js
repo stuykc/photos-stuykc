@@ -31,26 +31,21 @@ $(function () {
         )
     );
 
-    if (window.location.hostname === 'localhost') {
+    if (window.location.hostname === 'photos.stuykc.org') {
         // Demo settings:
         $('#fileupload').fileupload('option', {
-            url: '//localhost:7001/upload',
-            // Enable image resizing, except for Android and Opera,
-            // which actually support image resizing, but fail to
-            // send Blob objects via XHR requests:
-            disableImageResize: /Android(?!.*Chrome)|Opera/
-                .test(window.navigator.userAgent),
-            maxFileSize: 5000000,
+            url: '//photos.stuykc.org/upload',
+            maxFileSize: 10000000,
             acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
         });
         // Upload server status check for browsers with CORS support:
         if ($.support.cors) {
             $.ajax({
-                url: '//localhost:7001/upload',
+                url: '//photos.stuykc.org/upload',
                 type: 'HEAD'
             }).fail(function () {
                 $('<div class="alert alert-danger"/>')
-                    .text('Upload server currently unavailable - ' +
+                    .text('Uploading to photos.stuykc.org currently unavailable - ' +
                             new Date())
                     .appendTo('#fileupload');
             });
