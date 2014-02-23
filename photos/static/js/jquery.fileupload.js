@@ -82,7 +82,7 @@
             // If undefined or empty, the name property of the file input field is
             // used, or "files[]" if the file input name property is also empty,
             // can be a string or an array of strings:
-            paramName: [$('#person').val(), $('#id').val(), $('#email').val(), $('#event').val()],
+            paramName: undefined,
             // By default, each file of a selection is uploaded using an individual
             // request for XHR type uploads. Set to false to upload file
             // selections in one request each:

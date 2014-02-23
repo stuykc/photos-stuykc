@@ -111,6 +111,8 @@ class UploadHandler(webapp2.RequestHandler):
         self.response.write(template.render({}))
 
     def post(self):
+        if (self.request.get('_method') == 'DELETE'):
+            return self.delete()
         result = {'files': self.handle_upload(self.request.get('person'), self.request.get('id'), self.request.get('email'), self.request.get('event'))}
         s = json.dumps(result, separators=(',', ':'))
         redirect = self.request.get('redirect')
@@ -118,6 +120,14 @@ class UploadHandler(webapp2.RequestHandler):
             return self.redirect(str(
                 redirect.replace('%s', urllib.quote(s, ''), 1)
             ))
+        if 'application/json' in self.request.headers.get('Accept'):
+            self.response.headers['Content-Type'] = 'application/json'
+        self.response.write(s)
+
+    def delete(self):
+        key = self.request.get('key') or ''
+        blobstore.delete(key)
+        s = json.dumps({key: True}, separators=(',', ':'))
         if 'application/json' in self.request.headers.get('Accept'):
             self.response.headers['Content-Type'] = 'application/json'
         self.response.write(s)

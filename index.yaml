@@ -1,9 +1,0 @@
-indexes:
-
-- kind: Media
-  properties:
-    - name: name
-    - name: id
-    - name: email
-    - name: event
-    - name: blobstore_key
