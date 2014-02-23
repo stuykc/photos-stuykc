@@ -43,7 +43,7 @@
     display: none;
   }
   .files .name {
-    width: 80px;
+    max-width: 420px;
     word-wrap: break-word;
   }
   .files audio,
@@ -52,6 +52,12 @@
   }
   .files img,
   .files canvas {
-    max-width: 100%;
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .cancel span {
+    display: none;
   }
 }

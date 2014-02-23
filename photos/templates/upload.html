@@ -6,7 +6,7 @@
 <!-- CSS adjustments for browsers with JavaScript disabled -->
 <noscript><link rel="stylesheet" href="/css/jquery.fileupload-noscript.css"></noscript>
 <noscript><link rel="stylesheet" href="/css/jquery.fileupload-ui-noscript.css"></noscript>
-<style>.name {word-break: break-word; font-size: 11.5px;} .size, .start, .cancel {white-space: nowrap;}</style>
+<style>.name {word-break: break-word; font-size: 11.5px;} .size, .start, .cancel {white-space: nowrap;} .start {margin-bottom: 3px;}</style>
 {% endblock %}
 {% block body %}
 <div class="page-header">
@@ -21,6 +21,20 @@
 <form id="fileupload" action="//photos.stuykc.org/upload" method="POST" enctype="multipart/form-data">
     <!-- Redirect browsers with JavaScript disabled to the origin page -->
     <noscript><input type="hidden" name="redirect" value="/"></noscript>
+    <div class="row">
+        <div class="span3">
+            <label for="name">Name:</label><input type="text" class="input-block-level" id="name" name="name" placeholder="First and last name" /></p>
+        </div>
+        <div class="span2">
+            <label for="id">ID:</label><input type="text" class="input-block-level" id="id" name="id" maxlength="4" placeholder="4 Digit ID" /></p>
+        </div>
+        <div class="span3">
+            <label for="email">Email:</label><input type="email" class="input-block-level" id="email" name="email" placeholder="Email Address" /></p>
+        </div>
+        <div class="span4">
+            <label for="event">Event:</label><input type="text" class="input-block-level" id="event" name="event" placeholder="Name of the Event" /></p>
+        </div>
+    </div>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
     <div class="row fileupload-buttonbar">
         <div class="span7">

@@ -14,6 +14,7 @@ MAX_VIDEO_FILE_SIZE = 1000000000 # bytes
 IMAGE_TYPES = re.compile('image/(gif|p?jpeg|(x-)?png)')
 VIDEO_TYPES = re.compile('mp4|avi')
 THUMBNAIL_MODIFICATOR = '=s100'  # max width / height
+EXPIRATION_TIME = 300 # cache expiration
 
 def cleanup(blob_keys):
     blobstore.delete(blob_keys)
