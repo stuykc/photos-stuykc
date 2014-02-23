@@ -35,7 +35,7 @@ handlers:
   expiration: 7d
 - url: /cors
   static_dir: photos/static/cors
-- url: /(upload|success)
+- url: /upload.*
   script: photos.upload.app
 - url: /admin/(approve|delete).*
   script: photos.admin.app
