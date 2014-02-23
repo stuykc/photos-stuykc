@@ -1,6 +1,6 @@
 indexes:
 
-- kind: Photo
+- kind: Media
   properties:
     - name: name
     - name: id

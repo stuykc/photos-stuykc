@@ -23,16 +23,16 @@
     <noscript><input type="hidden" name="redirect" value="/"></noscript>
     <div class="row">
         <div class="span3">
-            <label for="name">Name:</label><input type="text" class="input-block-level" id="name" name="name" placeholder="First and last name" /></p>
+            <label for="name">Name:</label><input type="text" class="input-block-level" id="person" name="person" placeholder="First and last name" autofocus />
         </div>
         <div class="span2">
-            <label for="id">ID:</label><input type="text" class="input-block-level" id="id" name="id" maxlength="4" placeholder="4 Digit ID" /></p>
+            <label for="id">ID:</label><input type="text" class="input-block-level" id="id" name="id" maxlength="4" placeholder="4 Digit ID" />
         </div>
         <div class="span3">
-            <label for="email">Email:</label><input type="email" class="input-block-level" id="email" name="email" placeholder="Email Address" /></p>
+            <label for="email">Email:</label><input type="email" class="input-block-level" id="email" name="email" placeholder="Email Address" />
         </div>
         <div class="span4">
-            <label for="event">Event:</label><input type="text" class="input-block-level" id="event" name="event" placeholder="Name of the Event" /></p>
+            <label for="event">Event:</label><input type="text" class="input-block-level" id="event" name="event" placeholder="Name of the Event" />
         </div>
     </div>
     <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
@@ -98,7 +98,7 @@
     </td>
     <td>
         {% if (!i && !o.options.autoUpload) { %}
-            <button class="btn btn-primary start" disabled>
+            <button class="btn btn-primary start" disabled disabled>
                 <i class="icon-white icon-upload"></i>
                 <span>Start</span>
             </button>
@@ -174,4 +174,30 @@
 <script src="/js/jquery.xdr-transport.js"></script>
 <![endif]-->
 {% endraw %}
+<script>
+$(document).on('keypress', '#id', function (event) {
+  return (((event.which > 47) && (event.which < 58)) || (event.which == 13));
+});
+var isFormGood = false;
+$(document).ready(function() {
+  $('.start').each(function() {$(this).prop('disabled', true);});
+  $('input').keyup(function() {
+    $('input[type=text], input[type=email]').each(function() {
+      if ($(this).val()) {
+        isFormGood = true
+      }
+      else {
+        isFormGood = false
+        return false
+      }
+    });
+    if (isFormGood) {
+      $('.start').each(function() {$(this).prop('disabled', false);});
+    }
+    else {
+      $('.start').each(function() {$(this).prop('disabled', true);});
+    }
+  });
+});
+</script>
 {% endblock %}

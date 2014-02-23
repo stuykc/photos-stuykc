@@ -4,7 +4,8 @@
 .event-text {font-weight: 200; text-align: center; margin-top: 10%;}
 .event-text.pull-left {float: left !important;}
 #last {padding-bottom: 60px;}
-@media screen and (max-width: 767px) {.event-photo {float: none;} .event-text {margin: 0; font-size: 16px;} #last {padding-bottom: 40px;}}
+.row {padding-top: 40px; padding-bottom: 40px;}
+@media screen and (max-width: 767px) {.event-photo {float: none;} .event-text {margin: 0; font-size: 16px;} #last {padding-bottom: 40px;} .row {padding: 0;}}
 #upload-button {position: fixed; bottom: 3%; left: 50%; margin-left: -106px; outline:none; border-radius:7px; -webkit-border-radius:7px; -moz-border-radius:7px; border:1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 0 25px rgba(255, 255, 255, 1); -webkit-box-shadow: 0 0 25px rgba(255, 255, 255, 1); -moz-box-shadow: 0 0 25px rgba(255, 255, 255, 1); border:1px solid rgba(255, 255, 255, 0.8);}
 </style>
 {% endblock %}
@@ -35,7 +36,7 @@
 <hr>
 <div class="row" id="last">
     <img class="event-photo span7 pull-right" src="/img/bid.jpg" alt="Kimlau Square Dau" />
-    <h2 class="event-text span5 pull-left">We prefer pictures of them at work. ☺</h2>
+    <h2 class="event-text span5 pull-left">We prefer pictures of you at work. ☺</h2>
 </div>
 <div id="upload-button">
     <a class="btn btn-primary btn-large" href="/upload">Upload your photos!</a>

@@ -1,4 +1,4 @@
-from photos import JINJA_ENVIRONMENT, Photo
+from photos import JINJA_ENVIRONMENT, Media
 import webapp2, urllib
 from google.appengine.api import users, images
 from google.appengine.ext import blobstore, db
@@ -13,7 +13,7 @@ class AdminPage(webapp2.RequestHandler):
                 template_values = {
                     'user': user.nickname(),
                     'logout_url': users.create_logout_url('/'),
-                    'images': fetchPhotos()
+                    'images': fetchMedias()
                 }
                 template = JINJA_ENVIRONMENT.get_template('admin.html')
                 self.response.write(template.render(template_values))
@@ -23,25 +23,25 @@ class AdminPage(webapp2.RequestHandler):
             login_url = users.create_login_url('/admin')
             self.redirect(login_url)
 
-def fetchPhotos():
-    photo_query = Photo.all().order('event')
+def fetchMedias():
+    media_query = Media.all().order('event')
     image_fetch = []
-    for photo in photo_query.run():
-        if photo.blob_key.content_type.find('image') != -1:
-            image_link = images.get_serving_url(photo.blob_key)
+    for media in media_query.run():
+        if media.blob_key.content_type.find('image') != -1:
+            image_link = images.get_serving_url(media.blob_key)
             image_link_thumb = image_link + '=s150-c'
             image_link_full = image_link + '=s0'
         else:
-            image_link_thumb = image_link_full = '/admin/serve/%s' % photo.blob_key.key()
+            image_link_thumb = image_link_full = '/admin/serve/%s' % media.blob_key.key()
 
-        image_fetch.append({'name': photo.name,
-                            'id': photo.stuyId,
-                            'email': photo.email,
-                            'event': photo.event,
-                            'file': photo.blob_key.filename,
+        image_fetch.append({'name': media.name,
+                            'id': media.stuyId,
+                            'email': media.email,
+                            'event': media.event,
+                            'file': media.blob_key.filename,
                             'thumbnail_link': image_link_thumb,
                             'image_link': image_link_full,
-                            'key': photo.blob_key.key()
+                            'key': media.blob_key.key()
                            })
     return image_fetch
 

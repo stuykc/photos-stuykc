@@ -5,7 +5,7 @@ JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.join(os.path.dirname(__file__), 'templates')),
     extensions=['jinja2.ext.autoescape'])
 
-class Photo(db.Model):
+class Media(db.Model):
     name = db.StringProperty()
     stuyId = db.StringProperty()
     email = db.StringProperty()

@@ -1,7 +1,7 @@
 from __future__ import with_statement
-from photos import JINJA_ENVIRONMENT, Photo
+from photos import JINJA_ENVIRONMENT, Media
 from google.appengine.api import files, images
-from google.appengine.ext import blobstore
+from google.appengine.ext import blobstore, db
 from google.appengine.ext.webapp import blobstore_handlers
 import json
 import re
@@ -60,7 +60,7 @@ class UploadHandler(webapp2.RequestHandler):
         files.finalize(blob)
         return files.blobstore.get_blob_key(blob)
 
-    def handle_upload(self):
+    def handle_upload(self, person, stuyId, email, event):
         results = []
         blob_keys = []
         for name, fieldStorage in self.request.POST.items():
@@ -95,6 +95,8 @@ class UploadHandler(webapp2.RequestHandler):
                     result['url'] = self.request.host_url +\
                         '/' + blob_key + '/' + urllib.quote(
                             result['name'].encode('utf-8'), '')
+                uploaded = Media(name=person, stuyId=stuyId, email=email, event=event, blob_key=blob_key)
+                db.put(uploaded)
             results.append(result)
         return results
 
@@ -109,7 +111,7 @@ class UploadHandler(webapp2.RequestHandler):
         self.response.write(template.render({}))
 
     def post(self):
-        result = {'files': self.handle_upload()}
+        result = {'files': self.handle_upload(self.request.get('person'), self.request.get('id'), self.request.get('email'), self.request.get('event'))}
         s = json.dumps(result, separators=(',', ':'))
         redirect = self.request.get('redirect')
         if redirect:

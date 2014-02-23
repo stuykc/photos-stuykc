@@ -107,7 +107,9 @@
                     }).removeClass('processing');
                     that._renderPreviews(data);
                 }).done(function () {
-                    data.context.find('.start').prop('disabled', false);
+                    if ($('#person').val() && $('#id').val() && $('#email').val() && $('#event').val()) {
+                        data.context.find('.start').prop('disabled', false);
+                    }
                     if ((that._trigger('added', e, data) !== false) &&
                             (options.autoUpload || data.autoUpload) &&
                             data.autoUpload !== false) {
