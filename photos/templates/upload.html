@@ -192,7 +192,11 @@ $(document).ready(function() {
       }
     });
     if (isFormGood) {
-      $('.start').each(function() {$(this).prop('disabled', false);});
+      $('.start').each(function() {
+        if ($(this).parent().parent().find('.error').text() == '') {
+          $(this).prop('disabled', false);
+        }
+      });
     }
     else {
       $('.start').each(function() {$(this).prop('disabled', true);});
